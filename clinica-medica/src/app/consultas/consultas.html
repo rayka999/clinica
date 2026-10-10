@@ -1,0 +1,137 @@
+<div class="container py-4">
+  <header class="mb-4">
+    <h1>Clínica Médica</h1>
+    <p class="text-muted">
+      Cadastro e gerenciamento de consultas
+    </p>
+  </header>
+
+  <section class="card p-4 mb-4">
+    <h2>Nova consulta</h2>
+
+    <form [formGroup]="formulario"
+          (ngSubmit)="cadastrarConsulta()">
+
+      <div class="mb-3">
+        <label for="nome" class="form-label">
+          Nome do paciente
+        </label>
+
+        <input
+          id="nome"
+          type="text"
+          class="form-control"
+          formControlName="nome"
+          placeholder="Digite o nome do paciente"
+        />
+
+        @if (formulario.controls.nome.touched &&
+             formulario.controls.nome.invalid) {
+          <small class="text-danger">
+            Informe um nome com pelo menos 3 caracteres.
+          </small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="preco" class="form-label">
+          Preço da consulta (R$)
+        </label>
+
+        <input
+          id="preco"
+          type="number"
+          class="form-control"
+          formControlName="preco"
+          min="0.01"
+          step="0.01"
+          placeholder="Ex.: 150.00"
+        />
+
+        @if (formulario.controls.preco.touched &&
+             formulario.controls.preco.invalid) {
+          <small class="text-danger">
+            Informe um preço maior que zero.
+          </small>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="data" class="form-label">
+          Data da consulta
+        </label>
+
+        <input
+          id="data"
+          type="date"
+          class="form-control"
+          formControlName="data"
+        />
+
+        @if (formulario.controls.data.touched &&
+             formulario.controls.data.invalid) {
+          <small class="text-danger">
+            Selecione a data da consulta.
+          </small>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="enviando()">
+        Cadastrar consulta
+      </button>
+    </form>
+  </section>
+
+
+<section class="card p-4">
+  <h2>Consultas cadastradas</h2>
+
+  @if (carregado(); as pronto) {
+    <p>
+      Quantidade de consultas:
+      <strong>{{ quantidadeConsultas() }}</strong>
+    </p>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th>Preço</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (consulta of consultas(); track $index) {
+            <tr>
+              <td>{{ consulta.nome }}</td>
+              <td>
+               {{ consulta.preco | currency:'BRL':'symbol':'1.2-2' }}
+              </td>
+              <td>{{ consulta.data | date:'dd/MM/yyyy' }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3">Nenhuma consulta cadastrada.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="total mt-3">
+        <h3>
+            Valor total apurado:
+            {{ total() | currency:'BRL':'symbol':'1.2-2' }}
+        </h3>
+    </div>
+  } @else {
+    <p>Carregando consultas...</p>
+  }
+</section>
+
+</div>

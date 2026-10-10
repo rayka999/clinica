@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+h1 {
+  color: #263a59;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+  color: #263a59;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.form-control {
+  padding: 0.7rem;
+}
+
+.btn-primary {
+  background-color: #2459a9;
+  border-color: #2459a9;
+}
+
+.btn-primary:hover {
+  background-color: #194580;
+}
+
+.total {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #e6f5eb;
+  color: #176b36;
+}
+
+.total h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.table {
+  vertical-align: middle;
+}
